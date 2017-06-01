@@ -13,3 +13,11 @@ fun checkNet(context: Context): Boolean {
     val info = manager.activeNetworkInfo
     return info?.isAvailable ?: false
 }
+
+fun getScreenWidth(context: Context):Int{
+    return context.resources.displayMetrics.widthPixels
+}
+
+fun dip2px(context: Context,value:Float):Int{
+    return (context.resources.displayMetrics.density * value + 0.5f).toInt()
+}

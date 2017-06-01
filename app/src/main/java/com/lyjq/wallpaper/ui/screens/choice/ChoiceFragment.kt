@@ -10,13 +10,13 @@ import android.widget.TextView
 /**
  * Created by liuxiaoyu on 2017/5/24.
  */
-class ChoiceFragment() : Fragment() , ChoiceView{
+class ChoiceFragment : Fragment() , ChoiceView{
 
-    override var presenter: ChoicePresenter? = null
-        get() = field
-        set(value) {
-            field = value
-        }
+    private var mPresenter: ChoicePresenter? = null
+
+    override fun setPresenter(presenter: ChoicePresenter) {
+        mPresenter = presenter
+    }
 
     override fun setProgressIndicator(active: Boolean) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -36,9 +36,10 @@ class ChoiceFragment() : Fragment() , ChoiceView{
 
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
         var textView = TextView(activity)
         textView.setText("choiceFragment")
-        presenter?.request()
+        mPresenter?.start()
         return textView
     }
 }

@@ -1,5 +1,4 @@
 package com.lyjq.wallpaper.ui.screens.main
-
 import com.antonioleiva.bandhookkotlin.di.scope.ActivityScope
 import com.lyjq.wallpaper.di.AppComponent
 import com.lyjq.wallpaper.di.AppModule
@@ -13,7 +12,7 @@ import javax.inject.Singleton
  */
 
 @ActivityScope
-@Component(dependencies = arrayOf(AppComponent::class),modules = arrayOf(HomeModule::class,ChoiceModule::class))
+@Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(HomeModule::class, ChoiceModule::class))
 interface MainComponent {
     fun inject(activity: MainActivity)
 }

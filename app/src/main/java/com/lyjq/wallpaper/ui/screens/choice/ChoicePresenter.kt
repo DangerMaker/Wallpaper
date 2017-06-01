@@ -10,9 +10,13 @@ import javax.inject.Inject
 class ChoicePresenter @Inject
 constructor(var view: ChoiceView): BasePresenter {
 
+    override fun start() {
+        request()
+    }
+
     @Inject
     fun setupListeners(){
-        view.presenter = this
+        view.setPresenter(this)
     }
 
     fun request(){

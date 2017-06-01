@@ -7,5 +7,5 @@ import com.lyjq.wallpaper.ui.base.BaseView
  */
 interface HomeView : BaseView<HomePresenter>{
 
-    fun gohead()
+    fun showList(list:List<Any>?)
 }
