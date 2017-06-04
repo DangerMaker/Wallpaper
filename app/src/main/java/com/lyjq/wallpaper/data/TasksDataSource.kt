@@ -31,4 +31,8 @@ interface TasksDataSource {
     fun getWeimeiTasks(pageNumber: Int,callback: LoadCategrayCallback)
 
     fun getBeautyTasks(pageNumber: Int,callback: LoadCategrayCallback)
+
+    fun getCustomTasks1(endpoint:String,pageNumber: Int,callback: LoadCategrayCallback)
+
+    fun getChannel():List<Task>
 }

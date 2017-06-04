@@ -4,11 +4,14 @@ import android.graphics.PixelFormat
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.View
+import android.widget.TextView
 import com.lyjq.wallpaper.R
+import com.lyjq.wallpaper.di.ChannelModule
 import com.lyjq.wallpaper.di.ChoiceModule
 import com.lyjq.wallpaper.di.HomeModule
 import com.lyjq.wallpaper.ui.base.BaseActivity
 import com.lyjq.wallpaper.ui.screens.home.*
+import com.lyjq.wallpaper.ui.screens.list.ChannelFragment
 import com.lyjq.wallpaper.ui.util.log
 import kotlinx.android.synthetic.main.activity_homepage_tabs.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,12 +27,16 @@ class MainActivity : BaseActivity() {
 
     var currentPosition = 0
     @Inject lateinit var homePresenter: HomePresenter
-    @Inject lateinit var choicePresenter:ChoicePresenter
+    @Inject lateinit var channelPresenter: ChannelPresenter
+
+    lateinit var titleView: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        titleView = findViewById(R.id.title) as TextView
 
         currentPosition = savedInstanceState?.getInt("currentPosition") ?: 0
         window.setFormat(PixelFormat.TRANSLUCENT)
@@ -38,7 +45,7 @@ class MainActivity : BaseActivity() {
 
     fun initView() {
         var homeFragment = HomeFragment()
-        var choiceFragment = ChoiceFragment()
+        var channelFragment = ChannelFragment()
         var emptyFragment3 = EmptyFragment()
         var emptyFragment4 = EmptyFragment()
         var emptyFragment5 = EmptyFragment()
@@ -46,18 +53,19 @@ class MainActivity : BaseActivity() {
         DaggerMainComponent.builder()
                 .appComponent(appComponent)
                 .homeModule(HomeModule(homeFragment))
-                .choiceModule(ChoiceModule(choiceFragment))
+                .channelModule(ChannelModule(channelFragment))
                 .build().inject(this)
 
         var fs = arrayListOf<Fragment>()
         fs.add(homeFragment)
+        fs.add(channelFragment)
         fs.add(emptyFragment3)
-        fs.add(choiceFragment)
         fs.add(emptyFragment4)
         fs.add(emptyFragment5)
 
-        home_pager.adapter = HomePageAdapter(supportFragmentManager,fs)
+        home_pager.adapter = HomePageAdapter(supportFragmentManager, fs)
         home_pager.setScrollable(false)
+        home_pager.offscreenPageLimit = 5
 
         switchTab(currentPosition)
         layout_home.onClick { switchTab(0) }
@@ -82,8 +90,14 @@ class MainActivity : BaseActivity() {
 
         var localView: View? = null
         when (position) {
-            0 -> localView = layout_home
-            1 -> localView = layout_channel
+            0 -> {
+                localView = layout_home
+                titleView.text = "精选"
+            }
+            1 -> {
+                localView = layout_channel
+                titleView.text = "分类"
+            }
             2 -> localView = layout_subscribe
             3 -> localView = layout_vip
             4 -> localView = layout_user
@@ -95,7 +109,7 @@ class MainActivity : BaseActivity() {
             localView.isEnabled = true
         }
         if (home_pager.currentItem != position) {
-            home_pager.setCurrentItem(position,false)
+            home_pager.setCurrentItem(position, false)
         }
     }
 

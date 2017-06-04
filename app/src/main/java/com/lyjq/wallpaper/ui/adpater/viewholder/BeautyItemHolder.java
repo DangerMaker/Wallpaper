@@ -13,6 +13,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.lyjq.wallpaper.R;
 import com.lyjq.wallpaper.data.model.BeautyInfo;
 import com.lyjq.wallpaper.data.model.Task;
+import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity;
 import com.lyjq.wallpaper.ui.util.ImageLoader;
 
 import static com.lyjq.wallpaper.ui.util.UtilKt.dip2px;
@@ -40,14 +41,14 @@ public class BeautyItemHolder extends BaseViewHolder<BeautyInfo> {
     public void setData(BeautyInfo data) {
         gridLayout.removeAllViews();
         title.setText("美女图片");
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ImageListActivity.class);
-//                intent.putExtra(ImageListFragment.ARGUMENT_TYPE,ImageListFragment.TYPE_BEAUTY);
-//                getContext().startActivity(intent);
-//            }
-//        });
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CategoryListActivity.class);
+                intent.putExtra("type",CategoryListActivity.Mapper.getBeauty());
+                getContext().startActivity(intent);
+            }
+        });
 
         for (int i = 0; i < 9; i++) {
             View convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_task_style1, gridLayout,false);

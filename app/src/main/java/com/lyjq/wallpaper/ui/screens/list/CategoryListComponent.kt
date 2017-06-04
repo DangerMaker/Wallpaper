@@ -1,6 +1,7 @@
 package com.lyjq.wallpaper.ui.screens.main
 import com.antonioleiva.bandhookkotlin.di.scope.ActivityScope
 import com.lyjq.wallpaper.di.*
+import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity
 import dagger.Component
 import javax.inject.Singleton
 
@@ -9,7 +10,7 @@ import javax.inject.Singleton
  */
 
 @ActivityScope
-@Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(HomeModule::class, ChannelModule::class))
-interface MainComponent {
-    fun inject(activity: MainActivity)
+@Component(dependencies = arrayOf(AppComponent::class), modules = arrayOf(CategoryListModule::class))
+interface CategoryListComponent {
+    fun inject(activity: CategoryListActivity)
 }

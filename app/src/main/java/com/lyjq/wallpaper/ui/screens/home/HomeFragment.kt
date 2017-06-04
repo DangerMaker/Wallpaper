@@ -14,7 +14,7 @@ import com.lyjq.wallpaper.ui.adpater.ChoiceAdapter
 /**
  * Created by liuxiaoyu on 2017/5/24.
  */
-class HomeFragment : Fragment(), HomeView {
+class HomeFragment : Fragment(), HomeContract.View {
 
     override fun showList(list: List<Any>?) {
         adapter?.addAll(list)

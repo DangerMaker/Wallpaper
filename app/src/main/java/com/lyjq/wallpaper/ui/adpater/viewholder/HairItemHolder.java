@@ -1,6 +1,8 @@
 package com.lyjq.wallpaper.ui.adpater.viewholder;
 
 import android.content.Intent;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.lyjq.wallpaper.R;
 import com.lyjq.wallpaper.data.model.HairInfo;
 import com.lyjq.wallpaper.data.model.Task;
+import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity;
 import com.lyjq.wallpaper.ui.util.ImageLoader;
 
 import static com.lyjq.wallpaper.ui.util.UtilKt.dip2px;
@@ -40,14 +43,15 @@ public class HairItemHolder extends BaseViewHolder<HairInfo> {
     public void setData(HairInfo data) {
         gridLayout.removeAllViews();
         title.setText("发型图片");
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ImageListActivity.class);
-//                intent.putExtra(ImageListFragment.ARGUMENT_TYPE,ImageListFragment.TYPE_HAIR);
-//                getContext().startActivity(intent);
-//            }
-//        });
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CategoryListActivity.class);
+                intent.putExtra("type",CategoryListActivity.Mapper.getHair());
+                getContext().startActivity(intent);
+
+            }
+        });
 
         for (int i = 0; i < 9; i++) {
             View convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_task_style1, gridLayout,false);

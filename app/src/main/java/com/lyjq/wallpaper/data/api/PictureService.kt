@@ -29,6 +29,9 @@ interface PictureService {
     @GET("meinvtupian/list_43_{page}.html")
     fun getBeautyUrlPage(@Path("page") page: Int): Call<String>
 
+    @GET("{endPoint}{page}.html")
+    fun getCustomoUrlPage1(@Path("endPoint") endPoint:String,@Path("page") page: Int):Call<String>
+
     companion object {
         val baseUrl = "http://www.55156.com/"
     }

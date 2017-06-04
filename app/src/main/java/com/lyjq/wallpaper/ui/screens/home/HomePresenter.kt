@@ -11,7 +11,7 @@ import javax.inject.Inject
  * Created by liuxiaoyu on 2017/5/24.
  */
 class HomePresenter @Inject
-constructor(var tasksRepository: TasksRepository, var homeView: HomeView) : BasePresenter {
+constructor(var tasksRepository: TasksRepository, var homeView: HomeContract.View) : HomeContract.Presenter {
 
     override fun start() {
         loadData()
@@ -22,7 +22,7 @@ constructor(var tasksRepository: TasksRepository, var homeView: HomeView) : Base
         homeView.setPresenter(this)
     }
 
-    fun loadData() {
+    override fun loadData() {
         tasksRepository.getMainTasks(object : TasksDataSource.LoadTasksCallback{
 
             override fun onTasksLoaded(tasks: List<Any>?) {

@@ -2,6 +2,7 @@ package com.lyjq.wallpaper.di
 
 import com.antonioleiva.bandhookkotlin.di.scope.ActivityScope
 import com.lyjq.wallpaper.ui.screens.home.HomeContract
+import com.lyjq.wallpaper.ui.screens.list.CategoryContract
 import dagger.Module
 import dagger.Provides
 
@@ -10,10 +11,10 @@ import dagger.Provides
  */
 
 @Module
-class HomeModule(private var view: HomeContract.View){
+class CategoryListModule(private var view: CategoryContract.View) {
 
     @Provides @ActivityScope
-    fun providesHomeView():HomeContract.View = view
+    fun providesCategory(): CategoryContract.View = view
 
 //    @Provides @ActivityScope
 //    fun providesHomePresenter() :HomePresenter = HomePresenter(view)

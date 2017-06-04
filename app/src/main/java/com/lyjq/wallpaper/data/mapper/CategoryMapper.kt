@@ -10,13 +10,95 @@ import java.util.ArrayList
  */
 class CategoryMapper {
 
-    companion object Hair{
-        fun transform(json:String):List<Task>{
+    companion object Mapper{
+
+        fun transformHair(json:String):List<Task>{
             var doc = Jsoup.parse(json)
-            return parse(doc)
+            return parseHair(doc)
         }
 
-        fun parse(document: Document): List<Task> {
+        fun parseHair(document: Document): List<Task> {
+            val tasks = arrayListOf<Task>()
+            val elements = document.select("div[class^=w960 r]")
+            val elementMain = elements[0]
+
+            val elementLlist = elementMain.select("div[class^=listBox]")
+            val liList = elementLlist.select("li")
+
+            for (info in liList) {
+                val a = info.select("a")
+                val title = a.attr("title")
+                val href = a.attr("href")
+                val img = a.select("img").attr("src")
+                println(title)
+                println(href)
+                println(img)
+                val task = Task(title, img, href, "")
+                tasks.add(task)
+            }
+            return tasks
+        }
+
+        fun transformWeiMei(json:String):List<Task>{
+            var doc = Jsoup.parse(json)
+            return parseWeiMei(doc)
+        }
+
+        fun parseWeiMei(document: Document): List<Task> {
+            val tasks = arrayListOf<Task>()
+            val elements = document.select("div[class^=w960 r]")
+            val elementMain = elements[0]
+
+            val elementLlist = elementMain.select("div[class^=listBox]")
+            val liList = elementLlist.select("li")
+
+            for (info in liList) {
+                val a = info.select("a")
+                val title = a.attr("title")
+                val href = a.attr("href")
+                val img = a.select("img").attr("src")
+                println(title)
+                println(href)
+                println(img)
+                val task = Task(title, img, href, "")
+                tasks.add(task)
+            }
+            return tasks
+        }
+
+        fun transformBeauty(json:String):List<Task>{
+            var doc = Jsoup.parse(json)
+            return parseBeauty(doc)
+        }
+
+        fun parseBeauty(document: Document): List<Task> {
+            val tasks = arrayListOf<Task>()
+            val elements = document.select("div[class^=w960 r]")
+            val elementMain = elements[0]
+
+            val elementLlist = elementMain.select("div[class^=listBox]")
+            val liList = elementLlist.select("li")
+
+            for (info in liList) {
+                val a = info.select("a")
+                val title = a.attr("title")
+                val href = a.attr("href")
+                val img = a.select("img").attr("src")
+                println(title)
+                println(href)
+                println(img)
+                val task = Task(title, img, href, "")
+                tasks.add(task)
+            }
+            return tasks
+        }
+
+        fun transformSexy(json:String):List<Task>{
+            var doc = Jsoup.parse(json)
+            return parseSexy(doc)
+        }
+
+        fun parseSexy(document: Document): List<Task> {
             val tasks = arrayListOf<Task>()
             val elements = document.select("div[class^=w960 r]")
             val elementMain = elements[0]

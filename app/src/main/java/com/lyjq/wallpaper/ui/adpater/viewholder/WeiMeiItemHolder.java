@@ -13,6 +13,7 @@ import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.lyjq.wallpaper.R;
 import com.lyjq.wallpaper.data.model.Task;
 import com.lyjq.wallpaper.data.model.WeiMeiInfo;
+import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity;
 import com.lyjq.wallpaper.ui.util.ImageLoader;
 
 import static com.lyjq.wallpaper.ui.util.UtilKt.dip2px;
@@ -39,14 +40,14 @@ public class WeiMeiItemHolder extends BaseViewHolder<WeiMeiInfo> {
     public void setData(WeiMeiInfo data) {
         gridLayout.removeAllViews();
         title.setText("唯美意境");
-//        more.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ImageListActivity.class);
-//                intent.putExtra(ImageListFragment.ARGUMENT_TYPE,ImageListFragment.TYPE_WEIMEI);
-//                getContext().startActivity(intent);
-//            }
-//        });
+        more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), CategoryListActivity.class);
+                intent.putExtra("type",CategoryListActivity.Mapper.getWeimei());
+                getContext().startActivity(intent);
+            }
+        });
 
         for (int i = 0; i < 6; i++) {
             View convertView = LayoutInflater.from(getContext()).inflate(R.layout.item_task_style1, gridLayout, false);
