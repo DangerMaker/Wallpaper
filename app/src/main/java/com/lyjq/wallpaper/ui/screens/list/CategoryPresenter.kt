@@ -14,7 +14,7 @@ import javax.inject.Inject
 class CategoryPresenter @Inject
 constructor(var repository: TasksRepository, var view: CategoryContract.View) : CategoryContract.Presenter {
 
-    override var type: Int = 0
+    override var endpoint: String = ""
         get() = field
         set(value) {
             field = value
@@ -33,13 +33,7 @@ constructor(var repository: TasksRepository, var view: CategoryContract.View) : 
     }
 
     override fun getData() {
-        when (type) {
-            0 -> getWeiMei()
-            1 -> getBeauty()
-            2 -> getHair()
-            3 -> getSexy()
-            4 -> getCustom1()
-        }
+        getCustom1()
     }
 
     override fun start() {
@@ -52,8 +46,11 @@ constructor(var repository: TasksRepository, var view: CategoryContract.View) : 
     }
 
     fun getCustom1() {
-        repository.getCustomTasks1(repository.getChannel()[0].url, pageNum, object : TasksDataSource.LoadCategrayCallback {
+        repository.getCustomTasks1(endpoint, pageNum, object : TasksDataSource.LoadCategrayCallback {
             override fun onTaskLoad(tasks: List<Task>) {
+                if(!view.isActive){
+                    return
+                }
                 if (pageNum == 1) {
                     view.showContent(tasks)
                 } else {
@@ -62,74 +59,15 @@ constructor(var repository: TasksRepository, var view: CategoryContract.View) : 
             }
 
             override fun onDataNotAvailable() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-    }
-
-    fun getHair() {
-        repository.getHairTasks(pageNum, object : TasksDataSource.LoadCategrayCallback {
-            override fun onTaskLoad(tasks: List<Task>) {
-                if (pageNum == 1) {
-                    view.showContent(tasks)
-                } else {
-                    view.showMoreContent(tasks)
+                if(pageNum > 1){
+                    pageNum--
                 }
-            }
-
-            override fun onDataNotAvailable() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-    }
-
-    fun getWeiMei() {
-        repository.getWeimeiTasks(pageNum, object : TasksDataSource.LoadCategrayCallback {
-            override fun onTaskLoad(tasks: List<Task>) {
-                if (pageNum == 1) {
-                    view.showContent(tasks)
-                } else {
-                    view.showMoreContent(tasks)
+                if(!view.isActive){
+                    return
                 }
-            }
-
-            override fun onDataNotAvailable() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                view.refreshFaild("something go wrong")
             }
         })
     }
-
-    fun getBeauty() {
-        repository.getBeautyTasks(pageNum, object : TasksDataSource.LoadCategrayCallback {
-            override fun onTaskLoad(tasks: List<Task>) {
-                if (pageNum == 1) {
-                    view.showContent(tasks)
-                } else {
-                    view.showMoreContent(tasks)
-                }
-            }
-
-            override fun onDataNotAvailable() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-    }
-
-    fun getSexy() {
-        repository.getSexyTasks(pageNum, object : TasksDataSource.LoadCategrayCallback {
-            override fun onTaskLoad(tasks: List<Task>) {
-                if (pageNum == 1) {
-                    view.showContent(tasks)
-                } else {
-                    view.showMoreContent(tasks)
-                }
-            }
-
-            override fun onDataNotAvailable() {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
-        })
-    }
-
 
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.lyjq.wallpaper.R;
+import com.lyjq.wallpaper.data.api.PictureService;
 import com.lyjq.wallpaper.data.model.HairInfo;
 import com.lyjq.wallpaper.data.model.Task;
 import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity;
@@ -47,7 +48,7 @@ public class HairItemHolder extends BaseViewHolder<HairInfo> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CategoryListActivity.class);
-                intent.putExtra("type",CategoryListActivity.Mapper.getHair());
+                intent.putExtra("endpoint", PictureService.Companion.getHair());
                 getContext().startActivity(intent);
 
             }

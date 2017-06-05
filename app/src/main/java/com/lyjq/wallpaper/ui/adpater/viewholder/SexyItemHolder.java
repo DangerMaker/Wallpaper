@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.lyjq.wallpaper.R;
+import com.lyjq.wallpaper.data.api.PictureService;
 import com.lyjq.wallpaper.data.model.SexyInfo;
 import com.lyjq.wallpaper.data.model.Task;
 import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity;
@@ -45,7 +46,7 @@ public class SexyItemHolder extends BaseViewHolder<SexyInfo> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), CategoryListActivity.class);
-                intent.putExtra("type",CategoryListActivity.Mapper.getSexy());
+                intent.putExtra("endpoint", PictureService.Companion.getSexy());
                 getContext().startActivity(intent);
             }
         });

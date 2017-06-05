@@ -9,10 +9,11 @@ import android.widget.TextView;
 
 import com.jude.easyrecyclerview.adapter.BaseViewHolder;
 import com.lyjq.wallpaper.R;
+import com.lyjq.wallpaper.data.api.PictureService;
 import com.lyjq.wallpaper.data.model.Task;
 import com.lyjq.wallpaper.ui.screens.list.CategoryListActivity;
 
-public class ChannelItemHolder extends BaseViewHolder<Task> implements View.OnClickListener{
+public class ChannelItemHolder extends BaseViewHolder<Task>{
     TextView title;
     RelativeLayout relativeLayout;
 
@@ -41,20 +42,20 @@ public class ChannelItemHolder extends BaseViewHolder<Task> implements View.OnCl
     }
 
     @Override
-    public void setData(Task data) {
+    public void setData(final Task data) {
         title.setText(data.getTitle());
         int i = getAdapterPosition() % colors.length;
         relativeLayout.setBackgroundResource(colors[i]);
-        relativeLayout.setOnClickListener(this);
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(),CategoryListActivity.class);
+                intent.putExtra("endpoint", data.getUrl());
+                getContext().startActivity(intent);
+            }
+        });
 
         GridLayoutManager.LayoutParams layoutParams = (GridLayoutManager.LayoutParams)relativeLayout.getLayoutParams();
         layoutParams.height = height;
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(getContext(),CategoryListActivity.class);
-        intent.putExtra("type", CategoryListActivity.Mapper.getXiuren());
-        getContext().startActivity(intent);
     }
 }

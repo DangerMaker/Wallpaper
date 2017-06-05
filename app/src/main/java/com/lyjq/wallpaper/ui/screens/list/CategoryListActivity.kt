@@ -18,14 +18,6 @@ import javax.inject.Inject
  */
 class CategoryListActivity : BaseActivity() {
 
-    companion object Mapper{
-        var weimei:Int = 0
-        var beauty:Int = 1
-        var hair:Int = 2
-        var sexy:Int = 3
-        var xiuren:Int = 4
-    }
-
     @Inject lateinit var mPresenter: CategoryPresenter
     var ffragment: Fragment ?= null
 
@@ -48,7 +40,7 @@ class CategoryListActivity : BaseActivity() {
                 .categoryListModule(CategoryListModule(clf))
                 .build().inject(this)
 
-        mPresenter.type = intent.getIntExtra("type",-1)
+        mPresenter.endpoint = intent.getStringExtra("endpoint")
     }
 
     fun goBack(view: View){

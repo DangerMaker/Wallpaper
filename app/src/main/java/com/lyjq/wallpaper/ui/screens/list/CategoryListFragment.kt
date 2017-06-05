@@ -17,7 +17,14 @@ import com.lyjq.wallpaper.ui.adpater.viewholder.ImageItemHolder
 /**
  * Created by liuxiaoyu on 2017/6/1.
  */
-class CategoryListFragment:Fragment(),CategoryContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
+class CategoryListFragment : Fragment(), CategoryContract.View, SwipeRefreshLayout.OnRefreshListener, RecyclerArrayAdapter.OnLoadMoreListener {
+
+    override val isActive: Boolean
+        get() = isAdded
+
+    override fun refreshFaild(msg: String) {
+        recyclerView?.showError()
+    }
 
     override fun onRefresh() {
         mPresenter?.onRefresh()
@@ -27,8 +34,8 @@ class CategoryListFragment:Fragment(),CategoryContract.View, SwipeRefreshLayout.
         mPresenter?.loadMore()
     }
 
-    var mPresenter:CategoryContract.Presenter?=null
-    var recyclerView:EasyRecyclerView?=null
+    var mPresenter: CategoryContract.Presenter? = null
+    var recyclerView: EasyRecyclerView? = null
     var mAdapter: RecyclerArrayAdapter<Task>? = null
 
     var column = 3
@@ -43,19 +50,25 @@ class CategoryListFragment:Fragment(),CategoryContract.View, SwipeRefreshLayout.
     }
 
     override fun showMoreContent(list: List<Task>) {
-        mAdapter?.addAll(list)
+        if (!list.isEmpty()){
+            mAdapter?.addAll(list)
+        }else{
+            //not any more data
+            mAdapter?.setNoMore(LayoutInflater.from(context).inflate(R.layout.view_nomore, null))
+            mAdapter?.stopMore()
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         var rootView = inflater!!.inflate(R.layout.fragment_news_list, container, false)
         recyclerView = rootView.findViewById(R.id.recycler) as EasyRecyclerView
-        mAdapter = object : RecyclerArrayAdapter<Task>(context){
+        mAdapter = object : RecyclerArrayAdapter<Task>(context) {
             override fun OnCreateViewHolder(parent: ViewGroup?, viewType: Int): BaseViewHolder<*> {
-                return ImageItemHolder(parent,column)
+                return ImageItemHolder(parent, column)
             }
         }
-        mAdapter!!.setMore(R.layout.view_more,this)
-        recyclerView!!.setLayoutManager(GridLayoutManager(context,column))
+        mAdapter!!.setMore(R.layout.view_more, this)
+        recyclerView!!.setLayoutManager(GridLayoutManager(context, column))
         recyclerView!!.setAdapterWithProgress(mAdapter)
         recyclerView!!.setRefreshListener(this)
 

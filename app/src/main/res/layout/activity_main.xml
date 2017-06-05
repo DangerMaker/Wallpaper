@@ -20,5 +20,5 @@
 
     <include
         android:id="@+id/home_tab"
-        layout="@layout/activity_homepage_tabs" />
+        layout="@layout/activity_main_tabs" />
 </RelativeLayout>

@@ -12,15 +12,19 @@ interface CategoryContract {
 
     interface View:BaseView<Presenter>{
 
+        val isActive:Boolean
+
         fun showContent(response: List<Task>)
 
         fun showMoreContent(list: List<Task>)
+
+        fun refreshFaild(msg: String)
 
     }
 
     interface Presenter:BasePresenter{
 
-        var type:Int
+        var endpoint:String
 
         fun onRefresh()
 

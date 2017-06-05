@@ -47,7 +47,7 @@ class MainActivity : BaseActivity() {
         var homeFragment = HomeFragment()
         var channelFragment = ChannelFragment()
         var emptyFragment3 = EmptyFragment()
-        var emptyFragment4 = EmptyFragment()
+        var webviewFragment = WebViewFragment()
         var emptyFragment5 = EmptyFragment()
 
         DaggerMainComponent.builder()
@@ -60,7 +60,7 @@ class MainActivity : BaseActivity() {
         fs.add(homeFragment)
         fs.add(channelFragment)
         fs.add(emptyFragment3)
-        fs.add(emptyFragment4)
+        fs.add(webviewFragment)
         fs.add(emptyFragment5)
 
         home_pager.adapter = HomePageAdapter(supportFragmentManager, fs)

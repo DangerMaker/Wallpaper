@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:id="@+id/layout_home"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:paddingTop="10dp"
+        >
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/main_tab_selector" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_home"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/homepage_tab_home_selector" />
+
+            <TextView
+                android:id="@+id/text_home"
+                style="@style/homepage_tab_text"
+                android:text="首页" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_channel"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+
+        android:layout_weight="1.0">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/main_tab_selector" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/homepage_tab_channel_selector" />
+
+            <TextView
+                android:id="@+id/text_channel"
+                style="@style/homepage_tab_text"
+                android:text="标签" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_subscribe"
+        android:layout_width="0.0dip"
+        android:layout_height="60dp"
+        android:layout_weight="1.0"
+        android:visibility="visible">
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/main_tab_selector" />
+
+
+        <com.lyjq.wallpaper.ui.view.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@drawable/center_qq_bg"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_vip"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+
+        android:layout_weight="1.0">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/main_tab_selector" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/img_vip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/homepage_tab_vip_selector" />
+
+            <TextView
+                android:id="@+id/text_vip"
+                style="@style/homepage_tab_text"
+                android:text="会员" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_user"
+        android:layout_width="0.0dip"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dp"
+        android:layout_weight="1.0">
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/main_tab_selector" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/img_user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/homepage_tab_user_selector" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/text_user"
+                style="@style/homepage_tab_text"
+                android:text="我的" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

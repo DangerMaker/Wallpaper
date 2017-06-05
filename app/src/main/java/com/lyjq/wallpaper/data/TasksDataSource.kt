@@ -24,14 +24,6 @@ interface TasksDataSource {
 
     fun getMainTasks(callback: LoadTasksCallback)
 
-    fun getHairTasks(pageNumber: Int,callback: LoadCategrayCallback)
-
-    fun getSexyTasks(pageNumber: Int,callback: LoadCategrayCallback)
-
-    fun getWeimeiTasks(pageNumber: Int,callback: LoadCategrayCallback)
-
-    fun getBeautyTasks(pageNumber: Int,callback: LoadCategrayCallback)
-
     fun getCustomTasks1(endpoint:String,pageNumber: Int,callback: LoadCategrayCallback)
 
     fun getChannel():List<Task>
