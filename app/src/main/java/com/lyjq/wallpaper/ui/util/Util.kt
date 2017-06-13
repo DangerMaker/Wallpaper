@@ -39,6 +39,12 @@ fun getAppHeight(context: Context):Int{
     return rect.height()
 }
 
+fun getStatusbarHeight(context: Context):Int{
+    val resources = context.resources
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+    return resources.getDimensionPixelSize(resourceId)
+}
+
 fun addFragmentToActivity(fragmentManager: FragmentManager,
                           fragment: Fragment, frameId: Int) {
     checkNotNull(fragmentManager)

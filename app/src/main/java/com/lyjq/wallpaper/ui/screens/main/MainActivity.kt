@@ -1,8 +1,10 @@
 package com.lyjq.wallpaper.ui.screens.main
 
+import android.graphics.Color
 import android.graphics.PixelFormat
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.Toolbar
 import android.view.View
 import android.widget.TextView
 import com.lyjq.wallpaper.R
@@ -18,6 +20,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.toast
 import javax.inject.Inject
+import android.os.Build
+import com.lyjq.wallpaper.ui.util.getStatusbarHeight
+import org.jetbrains.anko.dip
+
 
 /**
  * Created by liuxiaoyu on 2017/5/20.
@@ -30,13 +36,31 @@ class MainActivity : BaseActivity() {
     @Inject lateinit var channelPresenter: ChannelPresenter
 
     lateinit var titleView: TextView
+    lateinit var toolbar: Toolbar
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (Build.VERSION.SDK_INT >= 21) {
+            val decorView = window.decorView
+            val option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            decorView.systemUiVisibility = option
+            window.statusBarColor = Color.TRANSPARENT
+
+            val toolbar = decorView.findViewById(R.id.toolbar)
+            if (toolbar != null) {
+                val lp = toolbar.layoutParams
+                lp.height = dip(48) + getStatusbarHeight(this)
+                toolbar.layoutParams = lp
+                toolbar.setPadding(0, getStatusbarHeight(this), 0, 0)
+            }
+        }
+
+
         titleView = findViewById(R.id.title) as TextView
+        toolbar = findViewById(R.id.toolbar) as Toolbar
 
         currentPosition = savedInstanceState?.getInt("currentPosition") ?: 0
         window.setFormat(PixelFormat.TRANSLUCENT)
@@ -46,9 +70,9 @@ class MainActivity : BaseActivity() {
     fun initView() {
         var homeFragment = HomeFragment()
         var channelFragment = ChannelFragment()
-        var emptyFragment3 = EmptyFragment()
+//        var emptyFragment3 = EmptyFragment()
         var webviewFragment = WebViewFragment()
-        var emptyFragment5 = EmptyFragment()
+        var centerFragment = CenterFragment()
 
         DaggerMainComponent.builder()
                 .appComponent(appComponent)
@@ -59,20 +83,20 @@ class MainActivity : BaseActivity() {
         var fs = arrayListOf<Fragment>()
         fs.add(homeFragment)
         fs.add(channelFragment)
-        fs.add(emptyFragment3)
+//        fs.add(emptyFragment3)
         fs.add(webviewFragment)
-        fs.add(emptyFragment5)
+        fs.add(centerFragment)
 
         home_pager.adapter = HomePageAdapter(supportFragmentManager, fs)
         home_pager.setScrollable(false)
-        home_pager.offscreenPageLimit = 5
+//        home_pager.offscreenPageLimit = 5
 
         switchTab(currentPosition)
         layout_home.onClick { switchTab(0) }
         layout_channel.onClick { switchTab(1) }
-        layout_subscribe.onClick { switchTab(2) }
-        layout_vip.onClick { switchTab(3) }
-        layout_user.onClick { switchTab(4) }
+//        layout_subscribe.onClick { switchTab(2) }
+        layout_vip.onClick { switchTab(2) }
+        layout_user.onClick { switchTab(3) }
     }
 
     fun switchTab(position: Int) {
@@ -93,14 +117,24 @@ class MainActivity : BaseActivity() {
             0 -> {
                 localView = layout_home
                 titleView.text = "精选"
+                toolbar.visibility = View.VISIBLE
             }
             1 -> {
                 localView = layout_channel
                 titleView.text = "分类"
+                toolbar.visibility = View.VISIBLE
             }
-            2 -> localView = layout_subscribe
-            3 -> localView = layout_vip
-            4 -> localView = layout_user
+//            2 -> localView = layout_subscribe
+            2 -> {
+                localView = layout_vip
+                titleView.text = "VIP"
+                toolbar.visibility = View.VISIBLE
+            }
+            3 -> {
+                localView = layout_user
+                titleView.text = "我的"
+                toolbar.visibility = View.GONE
+            }
             else -> log("localView", "none")
         }
 

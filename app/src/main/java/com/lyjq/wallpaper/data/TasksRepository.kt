@@ -3,6 +3,7 @@ package com.lyjq.wallpaper.data
 import com.lyjq.wallpaper.data.api.PictureService
 import com.lyjq.wallpaper.data.mapper.CategoryMapper
 import com.lyjq.wallpaper.data.mapper.MainPageMapper
+import com.lyjq.wallpaper.data.mapper.ShowPageMapper
 import com.lyjq.wallpaper.data.model.Task
 import com.lyjq.wallpaper.ui.util.log
 import retrofit2.Call
@@ -18,6 +19,20 @@ import javax.inject.Singleton
 @Singleton
 class TasksRepository @Inject
 constructor(var taskService: PictureService) : TasksDataSource {
+
+    override fun gePageUrl(url:String,callback: TasksDataSource.LoadPageUrlCallback){
+        taskService.getSetUrl(url).enqueue(object : Callback<String> {
+
+            override fun onFailure(call: Call<String>?, t: Throwable?) {
+                callback.onDataNotAvailable()
+            }
+
+            override fun onResponse(call: Call<String>?, response: Response<String>?) {
+                callback.onTaskLoad(ShowPageMapper(response!!.body()).transform())
+            }
+
+        })
+    }
 
     override fun getChannel(): List<Task> {
         var list = arrayListOf<Task>()
@@ -78,6 +93,9 @@ constructor(var taskService: PictureService) : TasksDataSource {
 
         })
     }
+
+
+
 
 
 }

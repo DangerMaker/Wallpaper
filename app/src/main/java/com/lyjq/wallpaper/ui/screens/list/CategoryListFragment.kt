@@ -1,5 +1,6 @@
 package com.lyjq.wallpaper.ui.screens.list
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.widget.SwipeRefreshLayout
@@ -71,6 +72,13 @@ class CategoryListFragment : Fragment(), CategoryContract.View, SwipeRefreshLayo
         recyclerView!!.setLayoutManager(GridLayoutManager(context, column))
         recyclerView!!.setAdapterWithProgress(mAdapter)
         recyclerView!!.setRefreshListener(this)
+
+        mAdapter!!.setOnItemClickListener{ position ->
+            val task = mAdapter!!.getItem(position)
+            var intent = Intent(context,ShowSetActivity::class.java)
+            intent.putExtra("url",task.url)
+            startActivity(intent)
+        }
 
         mPresenter?.start()
         return rootView

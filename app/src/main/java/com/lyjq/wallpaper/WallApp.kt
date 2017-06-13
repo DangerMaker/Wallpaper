@@ -2,6 +2,8 @@ package com.lyjq.wallpaper
 
 import android.app.Activity
 import android.app.Application
+import com.bumptech.glide.Glide
+import com.bumptech.glide.MemoryCategory
 import com.lyjq.wallpaper.di.AppComponent
 import com.lyjq.wallpaper.di.AppModule
 import com.lyjq.wallpaper.di.DaggerAppComponent
@@ -21,7 +23,9 @@ class WallApp : Application() {
 
         mAppComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(applicationContext))
-                .build();
+                .build()
+
+        Glide.get(this).setMemoryCategory(MemoryCategory.LOW)
     }
 
     fun registerActivity(activity:Activity){

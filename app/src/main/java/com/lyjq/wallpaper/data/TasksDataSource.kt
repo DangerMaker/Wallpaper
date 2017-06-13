@@ -22,9 +22,18 @@ interface TasksDataSource {
         fun onDataNotAvailable()
     }
 
+    interface LoadPageUrlCallback{
+
+        fun onTaskLoad(tasks: List<String>?)
+
+        fun onDataNotAvailable()
+    }
+
     fun getMainTasks(callback: LoadTasksCallback)
 
     fun getCustomTasks1(endpoint:String,pageNumber: Int,callback: LoadCategrayCallback)
 
     fun getChannel():List<Task>
+
+    fun gePageUrl(url:String,callback: LoadPageUrlCallback)
 }

@@ -4,6 +4,7 @@ package com.lyjq.wallpaper.ui.screens.main
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.ViewGroup
 import java.util.*
 
 /**
@@ -17,5 +18,9 @@ class HomePageAdapter(fragmentManager: FragmentManager, private val fragments: A
 
     override fun getCount(): Int {
         return fragments.size
+    }
+
+    override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+//        super.destroyItem(container, position, `object`)
     }
 }

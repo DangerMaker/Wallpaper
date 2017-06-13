@@ -8,11 +8,11 @@
     <include layout="@layout/main_tool_bar" />
 
     <com.lyjq.wallpaper.ui.view.UnScrollViewPager
+        android:layout_below="@+id/toolbar"
         android:id="@+id/home_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:layout_marginTop="48dp"
         android:layout_marginBottom="50dp"
         android:background="#ffe6e6e6"
         android:flipInterval="30"
